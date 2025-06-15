@@ -75,5 +75,52 @@ JOIN country c ON s.countryID = c.countryID
 GROUP BY country_name, YEAR(sales_date)
 ORDER BY year, total DESC;
 
+# 6) Rispondere alla seguente domanda: qual è la categoria di articoli maggiormente richiesta dal mercato?
+SELECT c.category_name, SUM(s.quantity) AS quantity, SUM(price *quantity) AS total_amount
+FROM sales s
+JOIN product p ON s.productID = p.productID
+JOIN category c ON p.categoryID = c.categoryID
+GROUP BY c.category_name
+ORDER BY quantity DESC;
+
+# 7) Rispondere alla seguente domanda: quali sono i prodotti invenduti? Proponi due approcci risolutivi differenti.
+SELECT *
+FROM product p
+LEFT JOIN sales s ON s.productID = p.productID
+WHERE salesID IS NULL # inserisco la condizione che il prodotto non sia stato venduto 
+;
+
+SELECT *
+FROM product
+WHERE productID NOT IN (SELECT DISTINCT productID FROM sales);
+
+# 8) Creare una vista sui prodotti in modo tale da esporre una “versione denormalizzata” delle informazioni utili (codice prodotto, nome prodotto, nome categoria)
+
+CREATE VIEW normalized_table AS
+SELECT p.productID AS codice_prodotto, product_name, category_name
+FROM sales s
+JOIN product p ON s.productID = p.productID
+JOIN category c ON p.categoryID = c.categoryID
+;
+
+SELECT * FROM normalized_table;
+
+# 9) Creare una vista per le informazioni geografiche
+# non ho capito bene questo punto, informazioni geografiche rispetto a cosa? alle vendite? al prodotto?
+# per nonc adere in errore ho creato una vista generica che mostri il country_name con la relativa region
+# così si viene a creare una vista che dia informazioni geografiche immediate e collegabile velocemente a le altre tabelle
+
+CREATE VIEW geo_info AS
+SELECT co.countryID, country_name, r.regionID, region_name
+FROM country co
+JOIN region r ON co.regionID = r.regionID
+;
+
+SELECT *
+FROM geo_info
+;
+
+
+
 
 
