@@ -83,8 +83,67 @@ INSERT INTO sales (productID, quantity, countryID, sales_date) VALUES
 (9, 6, 7, '2024-03-15'),
 (10, 6, 8, '2024-03-18');
 
+ALTER TABLE product
+ADD COLUMN price DECIMAL(10,2);
 
+UPDATE product SET price = 1200.00  WHERE productID = 1;  -- Mountain Bike 3000
+UPDATE product SET price = 800.00   WHERE productID = 2;  -- City Bike 500
+UPDATE product SET price = 25.00    WHERE productID = 3;  -- Bike Gloves M
+UPDATE product SET price = 75.00    WHERE productID = 4;  -- Bike Helmet
+UPDATE product SET price = 300.00   WHERE productID = 5;  -- Drone FlyX
+UPDATE product SET price = 250.00   WHERE productID = 6;  -- Smartwatch Pro
+UPDATE product SET price = 40.00    WHERE productID = 7;  -- Puzzle 1000
+UPDATE product SET price = 60.00    WHERE productID = 8;  -- Board Game Deluxe
+UPDATE product SET price = 150.00   WHERE productID = 9;  -- E-Book Reader
+UPDATE product SET price = 20.00    WHERE productID = 10; -- Children Story Book
 
+INSERT INTO region (region_name) VALUES 
+('North America'),
+('Asia');
+
+INSERT INTO country (country_name, regionID) VALUES 
+('USA', 6),        
+('Canada', 6),
+('Japan', 7),     
+('South Korea', 7);
+
+INSERT INTO category (category_name) VALUES 
+('Toys'),
+('Educational'),
+('Outdoor');
+
+INSERT INTO product (product_name, categoryID, price) VALUES 
+('Lego City', 7, 29.99),
+('Puzzle 1000 pezzi', 8, 14.50),
+('Triciclo Rosso', 9, 55.00),
+('Pallone Basket', 9, 19.99),  
+('Libro Interattivo', 8, 24.90); 
+
+INSERT INTO sales (productID, quantity, countryID, sales_date) VALUES 
+(1, 2, 1, '2024-07-10'),
+(1, 1, 2, '2024-08-05'),
+(2, 3, 3, '2024-07-21'),
+(3, 1, 4, '2024-09-12'),
+(2, 2, 5, '2024-10-01'),
+(1, 4, 6, '2024-11-18');
+
+INSERT INTO country (country_name, regionID) VALUES
+('France', 1),
+('Germany', 1),
+('Italy', 2),
+('Spain', 2),
+('USA', 3),
+('Canada', 3);
+
+INSERT INTO product (product_name, categoryID, price) VALUES
+('Lego Classic', 1, 29.99),
+('Action Figure Marvel', 1, 19.50),
+('Puzzle 1000 pezzi', 2, 14.90),
+('Libro Educativo STEM', 2, 21.00),
+('Pallone da calcio', 3, 24.99),
+('Monopattino', 3, 79.90),
+('Set Pittura Creativa', 2, 17.50),
+('Trenino Elettrico', 1, 39.99);
 
 
 
